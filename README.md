@@ -93,6 +93,11 @@ Users 表存所有用户。每个用户有唯一键 Users_Id。Banned 表示这
 +------------+-------------------+
 ```
 
-## End
+## 结果：
+select o.Request_at Day,(round(count(if(status!="completed",status,null))/count(status),2) )  `Cancellation Rate` 
+from  user u inner join orders o
+on  u.User_ID = o.Customer_ID and  u.banned != 'Yes'
+where  o.Request_at >= '2018-11-11' and  o.Request_at <= '2018-11-13'
+group by  o.Request_at
 
 祝您顺利
